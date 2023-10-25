@@ -26,7 +26,14 @@ public class QueueList {
         }
     }
     public int sizeOfQueue(){
-        return size;
+        Node current = front;
+        int nodeCount = 0;
+        while(current != null){
+            nodeCount++;
+            current = current.next;
+        }
+        return nodeCount;
+
     }
     public void print(){
         if(front == null){
@@ -56,6 +63,20 @@ public class QueueList {
         }
         front = previous;
         rear = current;
+    }
+    public int removeSecondFromFront() {
+        if (front == null || front.next == null) {
+            System.out.println("Queue is empty or has less than two elements.");
+        }
+
+        Node secondElement = front.next;
+        front.next = secondElement.next;
+
+        if (front.next == null) {
+            rear = front;
+        }
+
+        return secondElement.data;
     }
 
 

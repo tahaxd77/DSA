@@ -14,11 +14,9 @@ public class Main {
         queueList.enqueue(2);
         queueList.enqueue(3);
         queueList.enqueue(4);
+        queueList.removeSecondFromFront();
         queueList.print();
-        queueList.dequeue();
-        queueList.print();
-        queueList.reverseQueue();
-        queueList.print();
+        System.out.println(queueList.sizeOfQueue());
 //        CircularList circularList = new CircularList();
 //        circularList.insert(1);
 //        circularList.insert(2);
