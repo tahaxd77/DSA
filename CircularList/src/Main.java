@@ -14,9 +14,9 @@ public class Main {
         queueList.enqueue(2);
         queueList.enqueue(3);
         queueList.enqueue(4);
-        queueList.removeSecondFromFront();
+        queueList.reverseQueue();
         queueList.print();
-        System.out.println(queueList.sizeOfQueue());
+
 //        CircularList circularList = new CircularList();
 //        circularList.insert(1);
 //        circularList.insert(2);
@@ -27,5 +27,14 @@ public class Main {
 //        circularList.delete(2);
 //        circularList.print();
 //        circularList.size();
+        LinkedStack stack = new LinkedStack();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.print();
+        stack.pop();
+        stack.print();
+        stack.size();
     }
 }
