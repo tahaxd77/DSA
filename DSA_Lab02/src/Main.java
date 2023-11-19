@@ -2,11 +2,16 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        String infix = "a - b / ( c + d * e )";
-        //String postfix = "2345-56/*+*+";
+        String infix = "((a + b) * c – (d – e))/(f + g)";
+        String prefix = "*-a/bc-/ade";
+        String postfix = "abc/-ad/e-*";
         System.out.println("Infix Expression: " + infix);
         System.out.println("Postfix Expression: " + infixToPostfix(infix));
         //System.out.println(postfixEvaluation(postfix));
+        System.out.println("Prefix Expression: " + prefix);
+        System.out.println("Postfix Expression: " + prefixToPostfix(prefix));
+        System.out.println("Postfix Expression: " + postfix);
+        System.out.println("Prefix Expression: " + postfixToPrefix(postfix));
     }
     public static String infixToPostfix(String infix) {
         Stack<Character> stack = new Stack<>();
@@ -17,10 +22,10 @@ public class Main {
             } else if (ch == '(') {
                 stack.push(ch);
             } else if (ch == ')') {
-                if (!stack.isEmpty() && stack.peek() != '(') {
+                while (!stack.isEmpty() && stack.peek() != '(') {
                     postfix.append(stack.pop());
                 }
-                else if (!stack.isEmpty() && stack.peek() == '(') {
+                if (!stack.isEmpty() && stack.peek() == '(') {
                     stack.pop();
                 }
             } else if (ch == ' ') {
@@ -28,14 +33,18 @@ public class Main {
             } else {
                 if (!stack.isEmpty() && precedence(ch) <= precedence(stack.peek())) {
                     postfix.append(stack.pop());
+                }else if(!stack.isEmpty() && precedence(ch) > precedence(stack.peek())) {
+                    stack.push(ch);
                 }
-                stack.push(ch);
+//                }else {
+//                    stack.push(ch);
+//                }
             }
         }
 
-        if (!stack.isEmpty()) {
+        while (!stack.isEmpty()) {
             if (stack.peek() == '(') {
-                postfix.append(stack.pop());
+                stack.pop();
             }
             else{
                 postfix.append(stack.pop());
@@ -43,6 +52,55 @@ public class Main {
 
         }
         return postfix.toString();
+    }
+    public static String prefixToPostfix(String prefix){
+        Stack<String> stack = new Stack<>();
+        StringBuilder postfix = new StringBuilder();
+        int length = prefix.length();
+        for(int i = length - 1; i >= 0; i--){
+            char ch = prefix.charAt(i);
+            if(Character.isLetterOrDigit(ch)){
+               stack.push(String.valueOf(ch));
+            }
+            else if(ch == ' '){
+                continue;
+            }
+            else if (isOperator(ch)){
+
+                    String operand1 = String.valueOf(stack.pop());
+                    String operand2 = String.valueOf(stack.pop());
+                    String result = operand1 + operand2 + ch;
+                    stack.push(result);
+
+            }
+        }
+        return stack.pop();
+    }
+    public static String postfixToPrefix(String postfix){
+        Stack<String> stack = new Stack<>();
+        //StringBuilder prefix = new StringBuilder();
+        int length = postfix.length();
+        for(int i = 0; i <= length-1; i++){
+            char ch = postfix.charAt(i);
+            if(Character.isLetterOrDigit(ch)){
+                stack.push(String.valueOf(ch));
+            }
+            else if(ch == ' '){
+                continue;
+            }
+            else if (isOperator(ch)){
+
+                String operand1 = String.valueOf(stack.pop());
+                String operand2 = String.valueOf(stack.pop());
+                String result =ch + operand2 + operand1;
+                stack.push(result);
+
+            }
+        }
+        return stack.pop();
+    }
+    public static boolean isOperator(char ch){
+        return (ch == '+' || ch == '-' || ch == '*' || ch == '/' || ch == '^');
     }
 
     public static int precedence(char operator) {
@@ -55,6 +113,8 @@ public class Main {
                 return 2;
             case '^':
                 return 3;
+            case '(':
+                return 0;
         }
         return -1;
     }

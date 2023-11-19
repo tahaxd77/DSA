@@ -3,6 +3,9 @@ import java.util.Arrays;
 public class PriorityQueue {
      int[] array;
     int size;
+    int front=-1;
+    int rear=-1;
+
 
 
      PriorityQueue(int capacity) {
@@ -18,7 +21,7 @@ public class PriorityQueue {
         return size == array.length;
     }
 
-    public void enqueue(int element) {
+    public void enqueue (int element) {
          int i=0;
         if (isFull()) {
             if(size == 0){
@@ -37,7 +40,49 @@ public class PriorityQueue {
         array[i+1] = element;
         size++;
     }
-
+    public void Enqueue(int element){
+        if (isFull()){
+            System.out.println("Queue is full");
+            return;
+        }
+        if(front==-1){
+            front=0;
+        }
+        rear=(rear+1)%array.length;
+        array[rear]=element;
+        size++;
+    }
+    public void Dequeue(){
+         int element;
+         if(isEmpty()){
+             System.out.println("Queue is empty");
+         }
+         else{
+             int index = FindMinIndex();
+             for (int k = index; k < size - 1; k++) {
+                 array[k] = array[k + 1];
+             }
+                size--;
+         }
+    }
+    public int FindMinIndex(){
+         int min = 0;
+            for(int i=0;i<size;i++){
+                if(array[i]<array[min]){
+                    min = i;
+                }
+            }
+            return min;
+    }
+    public int FindMaxIndex(){
+        int max = 0;
+        for(int i=0;i<size;i++){
+            if(array[i]>array[max]){
+                max = i;
+            }
+        }
+        return max;
+    }
     public int dequeue() {
         if (isEmpty()) {
             System.out.println("Priority queue is empty. Cannot dequeue.");
@@ -63,19 +108,21 @@ public class PriorityQueue {
     public static void main(String[] args) {
         PriorityQueue priorityQueue = new PriorityQueue(10);
 
-        priorityQueue.enqueue(3);
-        priorityQueue.enqueue(5);
-        priorityQueue.enqueue(1);
-        priorityQueue.enqueue(7);
-        priorityQueue.enqueue(2);
+       priorityQueue.Enqueue(5);
+         priorityQueue.Enqueue(3);
+            priorityQueue.Enqueue(1);
+                priorityQueue.Enqueue(2);
+                    priorityQueue.Enqueue(7);
 
-        priorityQueue.display(); // Output: Priority queue elements: 7 5 1 3 2
-
-        System.out.println("Dequeue: " + priorityQueue.dequeue()); // Output: Dequeue: 7
-
-        priorityQueue.display(); // Output: Priority queue elements: 5 3 1 2
-        priorityQueue.dequeue();
+        priorityQueue.display();// Output: Priority queue elements: 7 5 1 3 2
+        priorityQueue.Dequeue();
         priorityQueue.display();
+
+//        System.out.println("Dequeue: " + priorityQueue.dequeue()); // Output: Dequeue: 7
+//
+//        priorityQueue.display(); // Output: Priority queue elements: 5 3 1 2
+//        priorityQueue.dequeue();
+//        priorityQueue.display();
         
     }
 }

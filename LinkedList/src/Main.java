@@ -29,5 +29,10 @@ public class Main {
          list2.reverseList();
             System.out.println("List after reversing: ");
          list2.printList();
+         LinkedList list3 = new LinkedList();
+         list3.sortedInsert(5);
+            list3.sortedInsert(3);
+         list3.sortedInsert(1);
+         list3.printList();
     }
 }
