@@ -1,5 +1,3 @@
-import static com.sun.tools.javac.code.Kinds.KindSelector.NIL;
-
 public class AVLTree {
     int value;
     int height;
@@ -22,6 +20,16 @@ public class AVLTree {
         this.right = right;
         height = 1 + Math.max(left.height, right.height);
     }
+    AVLTree(int[] a) {
+        if (a == null || a.length == 0) {
+            return;
+        }
+        this.value = a[0];
+        for (int i = 1; i < a.length; i++) {
+            this.grow(a[i]);
+        }
+    }
+
     public AVLTree grow(int value){
         if(value < this.value){
             if(left == null){
@@ -185,6 +193,43 @@ public class AVLTree {
             right.printPostOrder();
         }
         System.out.println(value);
+    }
+    public boolean isAvlTree(){
+        if(left != null){
+            if(!left.isAvlTree()){
+                return false;
+            }
+        }
+        if(right != null){
+            if(!right.isAvlTree()){
+                return false;
+            }
+        }
+        int leftHeight = 0;
+        int rightHeight = 0;
+        if(left != null){
+            leftHeight = left.getHeight();
+        }
+        if(right != null){
+            rightHeight = right.getHeight();
+        }
+        return Math.abs(leftHeight - rightHeight) <= 1;
+    }
+    public boolean contains(int data){
+        if(data == value){
+            return true;
+        }
+        if(data < value){
+            if(left == null){
+                return false;
+            }
+            return left.contains(data);
+        }else{
+            if(right == null){
+                return false;
+            }
+            return right.contains(data);
+        }
     }
 
 }

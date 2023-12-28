@@ -8,5 +8,10 @@ public class Node {
         this.right = null;
     }
 
-
+    @Override
+    public String toString() {
+        return "Node{" +
+                "data=" + data +
+                '}';
+    }
 }

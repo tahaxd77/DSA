@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.library_management_system.HelloController">
+   <children>
+      <Label alignment="CENTER" layoutY="24.0" prefHeight="49.0" prefWidth="600.0" text="UPDATE BOOK">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="229.0" layoutY="82.0" text="Enter ISBN to update:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="91.0" layoutY="156.0" text="Title:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="84.0" layoutY="190.0" text="Author:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="89.0" layoutY="225.0" text="ISBN:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="259.0" text="Publ. Year:">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="updateTitleTextField" layoutX="155.0" layoutY="154.0" prefHeight="25.0" prefWidth="256.0" />
+      <TextField fx:id="updateAuthorTextField" layoutX="155.0" layoutY="188.0" prefHeight="25.0" prefWidth="256.0" />
+      <TextField fx:id="updateIsbnTextField" layoutX="155.0" layoutY="223.0" prefHeight="25.0" prefWidth="256.0" />
+      <TextField fx:id="updateYearTextField" layoutX="155.0" layoutY="257.0" prefHeight="25.0" prefWidth="256.0" />
+      <Label fx:id="updateLabel" layoutX="198.0" layoutY="342.0" prefHeight="21.0" prefWidth="206.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="updateButton" layoutX="274.0" layoutY="309.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="Update" />
+      <Button fx:id="updateSceneBackButton" layoutX="40.0" layoutY="24.0" mnemonicParsing="false" onAction="#switchToMenuScene" prefHeight="25.0" prefWidth="56.0" text="&lt; Back" />
+      <TextField fx:id="toUpdateIsbnTextField" layoutX="224.0" layoutY="110.0" prefHeight="25.0" prefWidth="152.0" />
+   </children>
+</AnchorPane>

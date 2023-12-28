@@ -23,7 +23,7 @@ public class LinkedStack {
             top = newNode;
         }
     }
-    public void push(){
+    public void pop(){
         if(isEmpty()){
             System.out.println("Stack is empty");
         }
